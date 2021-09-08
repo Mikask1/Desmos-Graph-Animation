@@ -1,9 +1,11 @@
 # Desmos-Graph-Animation
 Graphs an animation onto Desmos
 - Desmos is a graphing calculator
+- Potrace is a software that turns edges into beizer lines
+- Beizer curves are PROBABLY just equations which follow a set of rules. IDK.
 
 Steps to do:
-- Get animation
+- Get the animation
 - Turn video to images per frame
 - Turn those images to BW
 - Trace the lines with Potrace
