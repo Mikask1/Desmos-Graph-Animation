@@ -2,7 +2,8 @@
 Graphs an animation onto Desmos
 - Desmos is a graphing calculator
 - Potrace is a software that turns edges into beizer lines
-- Beizer curves are PROBABLY just equations which follow a set of rules. IDK.
+- Beizer curves are PROBABLY just equations which follow a set of rules. IDK
+- And finally, Python is cool
 
 Steps to do:
 - Get the animation
