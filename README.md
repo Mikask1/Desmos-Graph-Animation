@@ -1,6 +1,7 @@
 # Desmos-Graph-Animation
 Graphs an animation onto Desmos
 - Desmos is a graphing calculator
+
 Steps to do:
 - Get animation
 - Turn video to images per frame
