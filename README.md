@@ -14,3 +14,5 @@ Steps to do:
 - Draw the hundreds of equation to Desmos
 - But wait, you gotta know how to graph onto Desmos first. So, use Desmos API to use it on your own web
 - Voila! You got yourself a subpar graph animation
+
+For obvious reasons, I will not be uploading the image sequence, or the video here. The video will probably be on youtube.
