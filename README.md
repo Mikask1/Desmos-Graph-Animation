@@ -6,9 +6,10 @@ Graphs an animation onto Desmos
 - And finally, Python is cool
 
 Steps to do:
-- Get the animation
-- Turn video to images per frame
-- Turn those images to BW
+- Get the animation ✅
+- Turn video to images per frame ✅
+- Turn those images to BW ✅
+- Get the edges using canny edge ✅
 - Trace the lines with Potrace
 - Get the equations from Potrace
 - Draw the hundreds of equation to Desmos
