@@ -1,4 +1,6 @@
 # Desmos-Graph-Animation
+This branch only graphs an image
+
 Graphs an animation onto Desmos
 - Desmos is a graphing calculator
 - Potrace is a software that turns edges into beizer lines
