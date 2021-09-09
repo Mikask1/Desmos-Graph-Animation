@@ -10,9 +10,9 @@ Steps to do:
 - Turn video to images per frame ✅
 - Turn those images to BW ✅
 - Get the edges using canny edge ✅
-- Trace the lines with Potrace
-- Get the equations from Potrace
-- Draw the hundreds of equation to Desmos
+- Trace the lines with Potrace✅
+- Get the equations from Potrace✅
+- Draw the hundreds of equation to Desmos✅
 - But wait, you gotta know how to graph onto Desmos first. So, use Desmos API to use it on your own web
 - Voila! You got yourself a subpar graph animation
 
