@@ -1,4 +1,11 @@
 # Desmos-Graph-Animation
+
+How to use:
+- Run main.py
+- Pick the image you want
+- It will take some time, there should be a latex.txt as a result
+- Copy and paste the latex.txt content to Desmos Graphing Calculator (just select all and copy, then paste on to the first equation on Desmos)
+
 Graphs an animation onto Desmos
 - Desmos is a graphing calculator
 - Potrace is a software that turns edges into beizer lines
