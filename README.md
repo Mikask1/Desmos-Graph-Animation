@@ -24,3 +24,8 @@ Steps to do:
 - Voila! You got yourself a subpar graph animation
 
 For obvious reasons, I will not be uploading the image sequence, or the video here. The video will probably be on youtube.
+
+Example:
+![Kaguya](https://user-images.githubusercontent.com/88318140/132680429-13c12472-a933-4d96-a3d7-7104ba23e4ed.png)
+
+![image](https://user-images.githubusercontent.com/88318140/132680393-407a120b-5846-41d1-a45a-e9665a8b642a.png)
