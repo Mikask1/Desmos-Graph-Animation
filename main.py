@@ -48,7 +48,15 @@ def get_edge(img, sigma = 0.33):
     edge_pil = Image.fromarray(edges)
     return edge_pil
 
-img = Image.open("chika.png")
+def inputFile():
+    import tkinter.filedialog as fd
+    import tkinter as tk
+    root = tk.Tk()
+    root.withdraw()
+    input_file = fd.askopenfilenames(parent=root, title='Choose image to graph')
+    return input_file
+
+img = Image.open(inputFile()[0])
 img = ImageOps.flip(img)
 
 latex = get_latex(np.asarray(img))
