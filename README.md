@@ -1,6 +1,6 @@
 # Desmos-Graph-Animation
 
-How to use:
+How to use Image to Graph:
 - Run main.py
 - Pick the image you want
 - It will take some time, there should be a latex.txt as a result
