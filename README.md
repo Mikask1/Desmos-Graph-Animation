@@ -1,4 +1,11 @@
 # Desmos-Graph-Animation
+
+How to use Image to Graph:
+- Run main.py
+- Pick the image you want
+- It will take some time, there should be a latex.txt as a result
+- Copy and paste the latex.txt content to Desmos Graphing Calculator (just select all and copy, then paste on to the first equation on Desmos)
+
 Graphs an animation onto Desmos
 - Desmos is a graphing calculator
 - Potrace is a software that turns edges into beizer lines
@@ -17,3 +24,11 @@ Steps to do:
 - Voila! You got yourself a subpar graph animation
 
 For obvious reasons, I will not be uploading the image sequence, or the video here. The video will probably be on youtube.
+
+Example:
+
+<img src="https://user-images.githubusercontent.com/88318140/132680429-13c12472-a933-4d96-a3d7-7104ba23e4ed.png" width="350">
+
+<img src="https://user-images.githubusercontent.com/88318140/132681141-a6a3085b-c286-4127-b09a-ec2ea3873604.png" width="350">
+
+
