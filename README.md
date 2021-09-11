@@ -1,4 +1,5 @@
 # Desmos-Graph-Animation
+Graphs an animation onto Desmos
 
 How to use Image to Graph:
 - Run main.py
@@ -6,7 +7,7 @@ How to use Image to Graph:
 - It will take some time, there should be a latex.txt as a result
 - Copy and paste the latex.txt content to Desmos Graphing Calculator (just select all and copy, then paste on to the first equation on Desmos)
 
-Graphs an animation onto Desmos
+FAQ:
 - Desmos is a graphing calculator
 - Potrace is a software that turns edges into beizer lines
 - Beizer curves are PROBABLY just equations which follow a set of rules. IDK
