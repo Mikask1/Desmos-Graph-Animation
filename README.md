@@ -1,6 +1,7 @@
 # Desmos-Graph-Animation
 FINISHED
 
+
 This branch only graphs an image
 
 How to use:
