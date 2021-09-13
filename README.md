@@ -21,11 +21,3 @@ How to use Image to Graph:
 The different ways you can make the result better:
 - Use the different edge-finder functions (e.g. thresh, sigma_balls, or otsu)
 - Set filtered to True or False (Filtering it will simplify the image)
-
-Graphs an image onto Desmos
-- Desmos is a graphing calculator
-- Potrace is a software that turns edges into beizer lines
-- Beizer curves are PROBABLY just equations which follow a set of rules. IDK
-- And finally, Python is cool
-
-For obvious reasons, I will not be uploading the image sequence, or the video here. The video will probably be on youtube.
