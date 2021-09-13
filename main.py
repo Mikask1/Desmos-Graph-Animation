@@ -5,7 +5,7 @@ import numpy as np
 
 def get_trace(data):
     bitmap = potrace.Bitmap(data)
-    path = bitmap.trace(turnpolicy = potrace.POTRACE_TURNPOLICY_MINORITY, alphamax= 1.0, opticurve = True, opttolerance = 0.8)
+    path = bitmap.trace(turnpolicy = potrace.POTRACE_TURNPOLICY_MINORITY, alphamax= 1.0, opticurve = True, opttolerance = 0.5)
     return path
 
 def get_latex(img): # written by kevinjycui, modified to fit my code
@@ -37,14 +37,43 @@ def get_latex(img): # written by kevinjycui, modified to fit my code
             start = segment.end_point
     return latex
 
-def get_edge(img, sigma = 0.33): 
+def thresh(gray):
+    thresh = cv2.threshold(gray, 80, 255, cv2.THRESH_BINARY)[1]
+    return thresh
+
+def otsu(gray, sigma=0.33, filtered=False):
+    # Get threshold using Otsu's method. Idk, I'm not a nerd
+    upper, thresh_im = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    lower = sigma*upper
+    if filtered:
+        gray = cv2.bilateralFilter(gray, 5, 50, 50)
+    edges = cv2.Canny(gray, lower, upper, L2gradient=True)
+    return edges
+
+def sigma_balls(gray, sigma = 0.33, filtered=False):
+    # Get threshold with sigma thingy. Idk, I'm not a nerd.
+    v = np.median(gray)
+    lower = int(max(0, (1.0 - sigma) * v))
+    upper = int(min(255, (1.0 + sigma) * v))
+    if filtered:
+        gray = cv2.bilateralFilter(gray, 5, 50, 50)
+
+    edges = cv2.Canny(gray, lower, upper, L2gradient=True)
+    return edges
+
+def show_im(img, x = 50, y = 50): # shows the img in a resized form
+    width = int(img.shape[1] * x / 100)
+    height = int(img.shape[0] * y / 100)
+    dim = (width, height)
+    img = cv2.resize(img,dim)
+    cv2.imshow("", img)
+    cv2.waitKey()
+    
+def get_edge(img): 
     img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
-    # Get threshold using Otsu's method
-    upper, thresh_im = cv2.threshold(img_gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-    lower = sigma*upper
+    edges = otsu(img_gray, filtered=True)
 
-    edges = cv2.Canny(img_gray, lower, upper)
     edge_pil = Image.fromarray(edges)
     return edge_pil
 
