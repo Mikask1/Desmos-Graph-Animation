@@ -1,6 +1,14 @@
 # Desmos-Graph-Animation
 Graphs an animation onto Desmos
 
+Install Dependencies:
+```sh
+pip install PIL
+pip install opencv-python
+pip install numpy
+pip install potrace
+```
+
 How to use Image to Graph:
 - Run main.py
 - Pick the image you want
