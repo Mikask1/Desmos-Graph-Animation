@@ -6,7 +6,7 @@ import potrace
 import numpy as np
 import json
 
-import preprocessing
+import preprocessing as pp
 
 def inputFile():
     import tkinter.filedialog as fd
@@ -53,7 +53,7 @@ def get_latex(img): # written by kevinjycui, modified to fit my code
 def get_edge(img): 
     img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
-    edges = preprocessing.otsu(img_gray, filtered=True)
+    edges = pp.otsu(img_gray, filtered=True)
 
     edge_pil = Image.fromarray(edges)
     return edge_pil
@@ -66,9 +66,7 @@ def get_graphs(latex):
         graphs.append({"id": "graph" + str(graph_id), "latex": i, "color": "#000000"})
     return graphs
 
-from os import path
-
-if not path.exists("frames") or not path.exists("frames/frame1.png"):
+if not os.path.exists("frames") or not os.path.exists("frames/frame1.png"):
     vidcap = cv2.VideoCapture(inputFile())
     success, image = vidcap.read()
     count = 1
@@ -79,10 +77,9 @@ if not path.exists("frames") or not path.exists("frames/frame1.png"):
         print('Frame '+str(count)+':', success)
         count += 1
 
+frames = pp.sorted_alphanumeric(os.listdir("frames"))
 
-frames = preprocessing.sorted_alphanumeric(os.listdir("frames"))
-
-if not path.exists("graphs"):
+if not os.path.exists("graphs"):
     os.mkdir("graphs")
 
 for i in range(len(frames)):
