@@ -1,5 +1,5 @@
 # Desmos-Graph-Animation
-Graphs an animation onto Desmos
+Graphs an "animation" onto Desmos
 
 Install Dependencies:
 ```sh
