@@ -9,6 +9,7 @@ pip install numpy
 pip install potrace
 pip install json
 pip install regex
+pip install tkinter
 ```
 
 Steps:
