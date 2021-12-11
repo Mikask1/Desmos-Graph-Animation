@@ -1,15 +1,17 @@
 <html>
     <head>
         <script src="https://www.desmos.com/api/v1.6/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
-        <div id="calculator" style="width: 1280px; height: 720px;"></div>
         <title>Desmos API</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
-    <body>
-        <script>
-            var elt = document.getElementById('calculator');
-            var calculator = Desmos.GraphingCalculator(elt);
-            calculator.setExpression({'id': 'graph1', 'latex': 'y=x^2' , 'color': '#2b2b2b'});
-            calculator.setExpression({'id': 'graph2', 'latex': 'y=x^3' , 'color': '#2464b4', 'lineWidth': 1.0});
-          </script>
+
+    <body style ="margin: 0">
+        
+        <input style = "height: 40px"type="file" name="inputfile" id="inputfile">
+        <button id="reset">RESET</button>
+        <button id="set-state">SET STATE</button>
+        <div id="calculator" style="width: 2520px; height: 1440px;"></div>
+
+        <script src="index.js"></script>
     </body>
 </html>

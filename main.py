@@ -1,37 +1,29 @@
+import os
+
 import cv2
 from PIL import Image, ImageOps
 import potrace
 import numpy as np
+import json
+
+import preprocessing
+
+def inputFile():
+    import tkinter.filedialog as fd
+    import tkinter as tk
+    root = tk.Tk()
+    root.withdraw()
+    input_file = fd.askopenfilename(parent=root, title="Choose video to graph")
+    return input_file
 
 def get_trace(data):
     bitmap = potrace.Bitmap(data)
-    path = bitmap.trace(turnpolicy = potrace.POTRACE_TURNPOLICY_MINORITY, alphamax= 1.0, opticurve = True, opttolerance = 0.8)
+    path = bitmap.trace(turnpolicy = potrace.POTRACE_TURNPOLICY_MINORITY, alphamax= 1.0, opticurve = True, opttolerance = 0.5)
     return path
 
-def get_edge(img, sigma = 0.33): 
-    img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-
-    # Get threshold using Otsu's method | For high accuracy
-    upper, thresh_im = cv2.threshold(img_gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-    lower = 0.5*upper
-    filtered = cv2.bilateralFilter(img_gray, 5, 50, 50)
-    edges = cv2.Canny(filtered, lower, upper, L2gradient=True)
-
-    '''
-    # Get threshold using Data Science method (idk) | For low accuracy, 1.5 times less equations
-    median = max(10, min(245, np.median(img_gray)))
-    lower = int(max(0, (1 - sigma) * median))
-    upper = int(min(255, (1 + sigma) * median))
-    edges = cv2.Canny(img_gray, lower, upper, L2gradient=True)
-    '''
-    
-    edge_pil = Image.fromarray(edges)
-    return edge_pil
-
-def get_latex_desmos_expression(img): # written by kevinjycui, modified to fit my code
-    expression = []
+def get_latex(img): # written by kevinjycui, modified to fit my code
+    latex = []
     path = get_trace(get_edge(img))
-    n = 1
     for curve in path.curves:
         segments = curve.segments
         start = curve.start_point
@@ -43,10 +35,8 @@ def get_latex_desmos_expression(img): # written by kevinjycui, modified to fit m
                 y1 = segment.c.y
                 x2 = segment.end_point.x
                 y2 = segment.end_point.y
-                n += 1
-                expression.append({'id': 'graph'+str(n), 'latex': '((1-t)%f+t%f,(1-t)%f+t%f)' % (x0, x1, y0, y1), 'color': '#2b2b2b', 'lineWidth': 1.0})
-                n += 1
-                expression.append({'id': 'graph'+str(n), 'latex': '((1-t)%f+t%f,(1-t)%f+t%f)' % (x1, x2, y1, y2), 'color': '#2b2b2b', 'lineWidth': 1.0})
+                latex.append("((1-t)%f+t%f,(1-t)%f+t%f)" % (x0, x1, y0, y1))
+                latex.append("((1-t)%f+t%f,(1-t)%f+t%f)" % (x1, x2, y1, y2))
             else:
                 x1 = segment.c1.x
                 y1 = segment.c1.y
@@ -54,19 +44,56 @@ def get_latex_desmos_expression(img): # written by kevinjycui, modified to fit m
                 y2 = segment.c2.y
                 x3 = segment.end_point.x
                 y3 = segment.end_point.y
-                n += 1
-                expression.append({'id': 'graph'+str(n), 'latex': '((1-t)((1-t)((1-t)%f+t%f)+t((1-t)%f+t%f))+t((1-t)((1-t)%f+t%f)+t((1-t)%f+t%f)),\
-                (1-t)((1-t)((1-t)%f+t%f)+t((1-t)%f+t%f))+t((1-t)((1-t)%f+t%f)+t((1-t)%f+t%f)))' % (x0, x1, x1, x2, x1, x2, x2, x3, y0, y1, y1, y2, y1, y2, y2, y3), 'color': '#2b2b2b', 'lineWidth': 1.0})
+                latex.append("((1-t)((1-t)((1-t)%f+t%f)+t((1-t)%f+t%f))+t((1-t)((1-t)%f+t%f)+t((1-t)%f+t%f)),\
+                (1-t)((1-t)((1-t)%f+t%f)+t((1-t)%f+t%f))+t((1-t)((1-t)%f+t%f)+t((1-t)%f+t%f)))" % \
+                (x0, x1, x1, x2, x1, x2, x2, x3, y0, y1, y1, y2, y1, y2, y2, y3))
             start = segment.end_point
-    return expression
-
-def input_to_file(expression):
-    with open("latex.txt", "w") as file:
-        file.writelines("%s\n" % l for l in expression)
+    return latex
     
-img = Image.open("chika.png")
-img = ImageOps.flip(img)
+def get_edge(img): 
+    img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
-expression = get_latex_desmos_expression(np.asarray(img))
-for i in expression:
-    print(i)
+    edges = preprocessing.otsu(img_gray, filtered=True)
+
+    edge_pil = Image.fromarray(edges)
+    return edge_pil
+
+def get_graphs(latex):
+    graph_id = 0
+    graphs = []
+    for i in latex:
+        graph_id += 1
+        graphs.append({"id": "graph" + str(graph_id), "latex": i, "color": "#000000"})
+    return graphs
+
+from os import path
+
+if not path.exists("frames") or not path.exists("frames/frame1.png"):
+    vidcap = cv2.VideoCapture(inputFile())
+    success, image = vidcap.read()
+    count = 1
+    os.mkdir("frames")
+    while success:
+        cv2.imwrite("frames/frame%d.png" % count, image)
+        success, image = vidcap.read()
+        print('Frame '+str(count)+':', success)
+        count += 1
+
+
+frames = preprocessing.sorted_alphanumeric(os.listdir("frames"))
+
+if not path.exists("graphs"):
+    os.mkdir("graphs")
+
+for i in range(len(frames)):
+    print("Processing:", frames[i])
+    img = Image.open("frames/"+frames[i])
+    img = ImageOps.flip(img)
+
+    graphs = get_graphs(get_latex(np.asarray(img)))
+    with open("graphs/latex"+str(i+1)+".txt", "w") as file:
+        length = len(graphs)
+        for i in range(length-1):
+            file.writelines(json.dumps(graphs[i])+"\n")
+        file.writelines(json.dumps(graphs[i]))
+
