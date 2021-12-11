@@ -27,7 +27,7 @@ FAQ:
 - Make sure to delete `frames` and `graphs` folder before converting another video
 
 
-For obvious reasons, I will not be uploading the image sequence, or the video here. The video will probably be on youtube.
+For obvious reasons, I will not be uploading the image sequence, or the video here.
 
 Example:
 
