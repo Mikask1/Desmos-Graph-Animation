@@ -7,6 +7,7 @@ pip install PIL
 pip install opencv-python
 pip install numpy
 pip install potrace
+pip install json
 ```
 
 Steps:
