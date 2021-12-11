@@ -4,6 +4,7 @@
         <title>Desmos API</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
+<<<<<<< HEAD
 
     <body style ="margin: 0">
         
@@ -13,5 +14,14 @@
         <div id="calculator" style="width: 2520px; height: 1440px;"></div>
 
         <script src="index.js"></script>
+=======
+    <body>
+        <script>
+            var elt = document.getElementById('calculator');
+            var calculator = Desmos.GraphingCalculator(elt);
+            calculator.setExpression({'id': 'graph1', 'latex': 'y=x^2' , 'color': '#000000', 'lineWidth': 1.0});
+            calculator.setExpression({'id': 'graph2', 'latex': 'y=x^3' , 'color': '#2464b4', 'lineWidth': 1.0});
+          </script>
+>>>>>>> e43d999a8cde199d6c816fb9c4f653c73fd4e300
     </body>
 </html>
