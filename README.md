@@ -8,6 +8,7 @@ pip install opencv-python
 pip install numpy
 pip install potrace
 pip install json
+pip install regex
 ```
 
 Steps:
