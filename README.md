@@ -28,6 +28,7 @@ FAQ:
 - It is recommended to use 10/15 fps videos to reduce the number of frames you need to load
 - You still need to screenshot every frame as it's still on working progress
 - Make sure to delete `frames` and `graphs` folder before converting another video
+- You should play around with the width and height of `<div id="calculator" style="width: 2520px; height: 1150px;"></div>` to better fit your screen
 
 
 For obvious reasons, I will not be uploading the image sequence, or the video here.
