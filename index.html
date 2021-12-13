@@ -2,15 +2,16 @@
     <head>
         <script src="https://www.desmos.com/api/v1.6/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
         <title>Desmos API</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
     </head>
 
-    <body style ="margin: 0">
-        
-        <input style = "height: 40px"type="file" name="inputfile" id="inputfile">
-        <button id="reset">RESET</button>
-        <button id="set-state">SET STATE</button>
-        <div id="calculator" style="width: 2520px; height: 1440px;"></div>
+    <body style ="margin: 0;">
+        <input style= "margin:0" type="file" name="inputfile" multiple="multiple" id="inputfile">
+        <button style= "margin:0" id="set-state">SET STATE</button>
+        <button style= "margin:0" id="save-state">SAVE STATE</button>
+        <button style= "margin:0" id="get-state">GET STATE</button>
+        <p id="frame" style= "margin:0; margin-left:10px;">Frame: 0</p>
+        <div id="calculator" style="width: 2550px; height: 1170px;"></div>
 
         <script src="index.js"></script>
     </body>

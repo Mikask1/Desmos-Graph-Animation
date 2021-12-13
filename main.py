@@ -8,6 +8,10 @@ import json
 
 import preprocessing as pp
 
+# CONTROLS
+FILTERED = True
+L2 = False
+
 def inputFile():
     import tkinter.filedialog as fd
     import tkinter as tk
@@ -53,7 +57,7 @@ def get_latex(img): # written by kevinjycui, modified to fit my code
 def get_edge(img): 
     img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
-    edges = pp.otsu(img_gray, filtered=True)
+    edges = pp.otsu(img_gray, L2=L2, filtered=FILTERED)
 
     edge_pil = Image.fromarray(edges)
     return edge_pil
@@ -66,31 +70,25 @@ def get_graphs(latex):
         graphs.append({"id": "graph" + str(graph_id), "latex": i, "color": "#000000"})
     return graphs
 
-if not os.path.exists("frames") or not os.path.exists("frames/frame1.png"):
+if not os.path.exists("graphs"):
+    os.mkdir("graphs")
     vidcap = cv2.VideoCapture(inputFile())
     success, image = vidcap.read()
     count = 1
-    os.mkdir("frames")
     while success:
-        cv2.imwrite("frames/frame%d.png" % count, image)
+        cv2.imwrite("frames/frame"+str(count)+".png", image)
+
+        img = Image.fromarray(image)
+        img = ImageOps.flip(img)
+
+        graphs = get_graphs(get_latex(np.asarray(img)))
+        with open("graphs/latex"+str(count)+".txt", "w") as file:
+            print("Processing: frame"+str(count))
+            length = len(graphs)
+            for i in range(length-1):
+                file.writelines(json.dumps(graphs[i])+"\n")
+            file.writelines(json.dumps(graphs[i]))
+
         success, image = vidcap.read()
-        print('Frame '+str(count)+':', success)
         count += 1
-
-frames = pp.sorted_alphanumeric(os.listdir("frames"))
-
-if not os.path.exists("graphs"):
-    os.mkdir("graphs")
-
-for i in range(len(frames)):
-    print("Processing:", frames[i])
-    img = Image.open("frames/"+frames[i])
-    img = ImageOps.flip(img)
-
-    graphs = get_graphs(get_latex(np.asarray(img)))
-    with open("graphs/latex"+str(i+1)+".txt", "w") as file:
-        length = len(graphs)
-        for i in range(length-1):
-            file.writelines(json.dumps(graphs[i])+"\n")
-        file.writelines(json.dumps(graphs[i]))
-
+    

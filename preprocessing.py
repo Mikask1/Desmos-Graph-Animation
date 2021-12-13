@@ -6,16 +6,20 @@ def thresh(gray, lower= 80):
     thresh = cv2.threshold(gray, lower, 255, cv2.THRESH_BINARY)[1]
     return thresh
 
-def otsu(gray, sigma=0.33, filtered=False):
+def otsu(gray, sigma = 0.33, filtered = False, L2 = True, show_img = False):
     # Get threshold using Otsu's method. Idk, I'm not a nerd
     upper, thresh_im = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     lower = sigma*upper
     if filtered:
         gray = cv2.bilateralFilter(gray, 5, 50, 50)
-    edges = cv2.Canny(gray, lower, upper, L2gradient=True)
+
+    edges = cv2.Canny(gray, lower, upper, L2gradient = L2)
+    
+    if show_img:
+        show_im(edges)
     return edges
 
-def sigma_balls(gray, sigma = 0.33, filtered=False):
+def sigma_balls(gray, sigma = 0.33, filtered = False, L2 = True, show_img = False):
     # Get threshold with sigma thingy. Idk, I'm not a nerd.
     v = np.median(gray)
     lower = int(max(0, (1.0 - sigma) * v))
@@ -25,6 +29,10 @@ def sigma_balls(gray, sigma = 0.33, filtered=False):
         gray = cv2.bilateralFilter(gray, 5, 50, 50)
 
     edges = cv2.Canny(gray, lower, upper, L2gradient=True)
+
+    if show_img:
+        show_im(edges)
+
     return edges
 
 def show_im(img, x = 50, y = 50): # shows the img in a resized form
