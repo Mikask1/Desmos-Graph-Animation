@@ -51,8 +51,6 @@ Once it's done rendering, it will directly download to your downloads folder
 - You can press `SAVE STATE` to save the current state and use `GET STATE` to return to that state
 
 
-For obvious reasons, I will not be uploading the image sequence, or the video here.
-
 Example:
 
 <img src="https://user-images.githubusercontent.com/88318140/132680429-13c12472-a933-4d96-a3d7-7104ba23e4ed.png" width="350">
