@@ -1,7 +1,8 @@
 # Desmos-Graph-Animation
-Graphs an "animation" onto Desmos
+Graphs a video onto Desmos
 
-Install Dependencies:
+## Steps
+### Install Dependencies:
 ```sh
 pip install PIL
 pip install opencv-python
@@ -12,23 +13,42 @@ pip install regex
 pip install tkinter
 ```
 
-Steps:
-1. Run `main.py` and select a video to convert to latex<sub>n</sub>.txt
-2. Open `index.html`
-3. Set the calculator view so that you can see the entire image and then press `SET STATE` (make sure it's blank and the image fits)
-4. Locate the `graphs` folder and input the latex<sub>n</sub>.txt
-5. Screenshot your screen
-6. Press `RESET` (this will reset the view to the state you've set)
-7. Repeat step 4-6 for every frame
-8. Use a tool to convert the screenshot image sequence to a video
+### Run `main.py`
+Select the video you want to convert.
+
+### Controls in `main.py`
+- Preprocessors (Pick one)
+```
+OTSU        = Uses Otsu's method to determine the upper and lower bound
+SIGMA_BALLS = Uses ... something that has to do with data (I really don't know how this works)
+```
+
+- Filters (Decreases the number of equations)
+```
+FILTERED    = Uses bilateral filter to smooth out the image
+L2          = Uses L2 gradient to better calculate the gradient magnitude
+```
+
+### Render
+Open `index.html`
+- Drag and zoom the viewport to make sure all of the image shows
+- Press `SET STATE`
+- Press `Choose Files` and select all the latex<sub>n</sub>.txt
+
+### Compiling the images
+Once it's done rendering, it will directly download to your downloads folder
+- Press `Allow` when it asks you if you want to let it donwload multiple files
+- It will ask you to allow for every 50 downloads/frames
+- Use a software/tool to combine the image sequence to a video
+
 
 FAQ:
 - Desmos is a graphing calculator
 - Potrace is a software that turns edges into beizer lines
-- It is recommended to use 10/15 fps videos to reduce the number of frames you need to load
-- You still need to screenshot every frame as it's still on working progress
-- Make sure to delete `frames` and `graphs` folder before converting another video
+- It is recommended to use 10/15 fps and 360p/480p videos to reduce the number of frames you need to load
+- Make sure to delete `graphs` folder before converting another video
 - You should play around with the width and height of `<div id="calculator" style="width: 2520px; height: 1150px;"></div>` to better fit your screen
+- You can press `SAVE STATE` to save the current state and use `GET STATE` to return to that state
 
 
 For obvious reasons, I will not be uploading the image sequence, or the video here.
