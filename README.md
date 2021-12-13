@@ -42,7 +42,7 @@ Once it's done rendering, it will directly download to your downloads folder
 - Use a software/tool to combine the image sequence to a video
 
 
-FAQ:
+## FAQ:
 - Desmos is a graphing calculator
 - Potrace is a software that turns edges into beizer lines
 - It is recommended to use 10/15 fps and 360p/480p videos to reduce the number of frames you need to load
