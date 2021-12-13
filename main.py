@@ -1,4 +1,5 @@
 import os
+import sys
 
 import cv2
 from PIL import Image, ImageOps
@@ -8,7 +9,11 @@ import json
 
 import preprocessing as pp
 
-# CONTROLS
+# PREPROCESSOR (Pick one)
+OTSU = True
+SIGMA_BALLS = False
+
+# FILTERS (To decrease the number of equations)
 FILTERED = True
 L2 = False
 
@@ -57,7 +62,13 @@ def get_latex(img): # written by kevinjycui, modified to fit my code
 def get_edge(img): 
     img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
-    edges = pp.otsu(img_gray, L2=L2, filtered=FILTERED)
+    if OTSU and not SIGMA_BALLS:
+        edges = pp.otsu(img_gray, L2=L2, filtered=FILTERED)
+    elif SIGMA_BALLS and not OTSU:
+        edges = pp.sigma_balls(img_gray, L2=L2, filtered=FILTERED)
+    else:
+        print("Pick one of the preprocessors")
+        sys.exit()
 
     edge_pil = Image.fromarray(edges)
     return edge_pil
