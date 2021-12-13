@@ -36,8 +36,8 @@ Open `index.html`
 - Press `Choose Files` and select all the latex<sub>n</sub>.txt
 
 ### Compiling the images
-Once it's done rendering, it will directly download to your downloads folder
-- Press `Allow` when it asks you if you want to let it donwload multiple files
+Once it's done rendering, the image sequence will directly download to your downloads folder
+- Press `Allow` when it asks you if you want to let it download multiple files
 - It will ask you to `Allow` every 50 downloads/frames
 - Use a software/tool to combine the image sequence to a video
 
