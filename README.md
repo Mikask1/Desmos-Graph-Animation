@@ -38,7 +38,7 @@ Open `index.html`
 ### Compiling the images
 Once it's done rendering, it will directly download to your downloads folder
 - Press `Allow` when it asks you if you want to let it donwload multiple files
-- It will ask you to allow for every 50 downloads/frames
+- It will ask you to `Allow` every 50 downloads/frames
 - Use a software/tool to combine the image sequence to a video
 
 
