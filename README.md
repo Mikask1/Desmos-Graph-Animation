@@ -48,7 +48,7 @@ Once it's done rendering, the image sequence will directly download to your down
 - It is recommended to use 10/15 fps and 360p/480p videos to reduce the number of frames you need to load
 - Make sure to delete `graphs` folder before converting another video
 - You should play around with the width and height of `<div id="calculator" style="width: 2520px; height: 1150px;"></div>` to better fit your screen
-- You can press `SAVE STATE` to save the current state and use `GET STATE` to return to that state
+- You can press `SAVE STATE` to save the current state and use `GET STATE` to return to that state even after reloading.
 
 
 Example:
