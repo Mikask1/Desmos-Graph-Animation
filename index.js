@@ -34,7 +34,10 @@ function render(){
     for (let i = 0; i < this.files.length; i++){
         let fr = new FileReader()
         fr.onload = () => {
-            frameEl.innerText = "Frame : "+(i+1)
+            let fileIndex = this.files[i].name.match(/(\d+)/)[0]
+            console.log(fileIndex)
+            frameEl.innerText = "Frame : "+fileIndex
+            
             var graphs = fr.result.split("\n")
             expression_states = []
             for (let i = 0; i < graphs.length; i++){
@@ -47,7 +50,7 @@ function render(){
                 calculator.setExpression(expression_state)
             })
 
-            calculator.asyncScreenshot(data => saveAs(data, "frame"+(i+1)+".png"))
+            calculator.asyncScreenshot(data => saveAs(data, "frame"+fileIndex+".png"))
         }
         fr.readAsText(this.files[i])
     }

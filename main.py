@@ -1,5 +1,6 @@
 import os
 import sys
+from multiprocessing import Pool
 
 import cv2
 from PIL import Image, ImageOps
@@ -67,7 +68,7 @@ def get_edge(img):
     elif SIGMA_BALLS and not OTSU:
         edges = pp.sigma_balls(img_gray, L2=L2, filtered=FILTERED)
     else:
-        print("Pick one of the preprocessors")
+        print("ERROR : Pick one of the preprocessors")
         sys.exit()
 
     edge_pil = Image.fromarray(edges)
@@ -81,25 +82,30 @@ def get_graphs(latex):
         graphs.append({"id": "graph" + str(graph_id), "latex": i, "color": "#000000"})
     return graphs
 
+def write_to_file(image, index):
+    img = Image.fromarray(image)
+    img = ImageOps.flip(img)
+
+    graphs = get_graphs(get_latex(np.asarray(img)))
+    with open("graphs/latex"+str(index)+".txt", "w") as file:
+        print("Processing: frame"+str(index))
+        length = len(graphs)
+        for i in range(length-1):
+            file.writelines(json.dumps(graphs[i])+"\n")
+        file.writelines(json.dumps(graphs[i]))
+
 if not os.path.exists("graphs"):
     os.mkdir("graphs")
+    images = []
     vidcap = cv2.VideoCapture(inputFile())
     success, image = vidcap.read()
-    count = 1
     while success:
-        cv2.imwrite("frames/frame"+str(count)+".png", image)
-
-        img = Image.fromarray(image)
-        img = ImageOps.flip(img)
-
-        graphs = get_graphs(get_latex(np.asarray(img)))
-        with open("graphs/latex"+str(count)+".txt", "w") as file:
-            print("Processing: frame"+str(count))
-            length = len(graphs)
-            for i in range(length-1):
-                file.writelines(json.dumps(graphs[i])+"\n")
-            file.writelines(json.dumps(graphs[i]))
-
+        images += [image]
         success, image = vidcap.read()
-        count += 1
+    
+    images_zip = zip(images, range(1, len(images)+1))
+    pool = Pool(os.cpu_count())
+    pool.starmap(write_to_file, images_zip)
+    
+    
     
