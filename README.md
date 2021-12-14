@@ -44,11 +44,13 @@ Once it's done rendering, the image sequence will directly download to your down
 
 ## FAQ:
 - Desmos is a graphing calculator
-- Potrace is a software that turns edges into beizer lines
+- Potrace is a software that turns bitmap images to vector (with beizer lines)
 - It is recommended to use 10/15 fps and 360p/480p videos to reduce the number of frames you need to load
 - Make sure to delete `graphs` folder before converting another video
 - You should play around with the width and height of `<div id="calculator" style="width: 2520px; height: 1150px;"></div>` to better fit your screen
 - You can press `SAVE STATE` to save the current state and use `GET STATE` to return to that state even after reloading.
+- You can run multiple `index.html` and do them in batches. Make sure it's on a different window.
+- If you run into `OSError: [WinError 1450] Insufficient system resources exist to complete the requested service`, you should manually allocate the number of cores to use in `Pool(os.cpu_count())` to `Pool(5)`
 
 
 Example:
