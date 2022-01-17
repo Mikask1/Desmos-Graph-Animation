@@ -1,5 +1,5 @@
 # Desmos-Graph-Animation
-Graphs a video onto Desmos
+Graphs a video onto Desmos. Example: https://youtu.be/GHGoi_Fn-Wo
 
 ## Steps
 ### Install Dependencies:
