@@ -49,7 +49,7 @@ Once it's done rendering, the image sequence will directly download to your down
 - Make sure to delete `graphs` folder before converting another video
 - You can press `SAVE STATE` to save the current state and use `GET STATE` to return to that state even after reloading.
 - You can run multiple `index.html` and do them in batches. Make sure it's on a different window.
-- If you run into `OSError: [WinError 1450] Insufficient system resources exist to complete the requested service`, you should manually allocate the number of cores to use in `Pool(os.cpu_count())` to `Pool(5)`
+- If you run into `OSError: [WinError 1450] Insufficient system resources exist to complete the requested service`, you should manually allocate the number of cores to use in `Pool(os.cpu_count())` to `Pool(NUMBER_OF_CORES)`
 
 
 Example:
